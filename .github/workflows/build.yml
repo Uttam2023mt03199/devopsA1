@@ -39,7 +39,7 @@ jobs:
         
     - name: Run build
       run: |
-        python app/app.py  # Replace with the actual command to run your tests 
+        nohup python app/app.py &  # Replace with the actual command to run your tests 
         exit 0
    
     
