@@ -40,7 +40,15 @@ jobs:
     - name: Run build
       run: |
         nohup python app/app.py &  # Replace with the actual command to run your tests 
-        exit 0
+
+        if [ $? -eq 0 ]; then
+          echo "Command executed successfully"
+          exit 0;
+        else
+          echo "Command failed"
+          exit 10;
+        fi
+    
    
     
   test:
