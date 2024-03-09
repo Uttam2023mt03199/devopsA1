@@ -68,7 +68,7 @@ def create_item():
 def update_item(item_id):
     """Update an existing item."""
     if not session.get('logged_in'):
-        return jsonify({'message': 'Unauthorized access'}), 401    
+        return jsonify({'message': 'Unauthorized access'}), 401
     data = request.json
     item = items_db.get(item_id)
     if item:
@@ -81,7 +81,7 @@ def update_item(item_id):
 def delete_item(item_id):
     """Delete an item."""
     if not session.get('logged_in'):
-        return jsonify({'message': 'Unauthorized access'}), 401    
+        return jsonify({'message': 'Unauthorized access'}), 401
     if item_id in items_db:
         del items_db[item_id]
         return jsonify({'message': 'Item deleted'})
