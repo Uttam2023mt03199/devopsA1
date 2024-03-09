@@ -1,5 +1,5 @@
 """importing the following modules"""
-from flask import Flask, jsonify, request, session
+#from flask import Flask, jsonify, request, session
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -57,7 +57,7 @@ def create_item():
     """Create a new item."""
     if not session.get('logged_in'):
         return jsonify({'message': 'Unauthorized access'}), 401
-   # data = request.json
+    data = request.json
     if 'name' in data:
         item_id = generate_item_id()
         item = {'id': item_id, 'name': data['name']}
