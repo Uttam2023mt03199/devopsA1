@@ -1,4 +1,4 @@
-name: Build
+name: CI with SonarCloud
 on:
   push:
     branches:
@@ -12,9 +12,55 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+          fetch-depth: 0  # Shallow clones should be disabled for better relevancy of analysis
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          
+  build:
+    name: Build Job
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
+      
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Run build
+      run: python app/app.py  # Replace with the actual command to run your tests 
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: pip install -r requirements.txt  # Adjust this command based on your setup
+      - name: Run tests
+        run: python test/test_app.py # Replace with the actual command to run your tests
+  lint:
+    name: Code Linting
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: pip install -r requirements.txt  # Adjust this command based on your setup
+      - name: Run linter
+        run: pylint app/app.py  # Replace with the actual command to run your linter
