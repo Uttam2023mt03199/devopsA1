@@ -36,6 +36,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+        pip install --upgrade Werkzeug
     - name: Run build
       run: python app/app.py  # Replace with the actual command to run your tests 
   test:
@@ -48,9 +49,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
       - name: Install dependencies
-        run: pip install -r requirements.txt  # Adjust this command based on your setup
+        run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
       - name: Run tests
-        run: python test/test_app.py # Replace with the actual command to run your tests
+        run: python test_app.py # Replace with the actual command to run your tests
   lint:
     name: Code Linting
     runs-on: ubuntu-latest
@@ -60,7 +63,10 @@ jobs:
           python-version: '3.x'
       - name: Checkout code
         uses: actions/checkout@v3
-      - name: Install dependencies
-        run: pip install -r requirements.txt  # Adjust this command based on your setup
+      - name: Install dependencies        
+        run: |
+        python -m pip install --upgrade pip
+        pip install pylint
+        pip install -r requirements.txt        
       - name: Run linter
         run: pylint app/app.py  # Replace with the actual command to run your linter
