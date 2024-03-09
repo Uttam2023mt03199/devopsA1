@@ -2,7 +2,7 @@ import unittest
 import json
 import sys
 import os
-sys.path.append(os.path.abspath('../app'))  # Adjust the path as needed
+sys.path.append(os.path.abspath('./app'))  # Adjust the path as needed
 
 from app import app
 
