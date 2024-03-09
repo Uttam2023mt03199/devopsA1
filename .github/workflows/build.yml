@@ -53,7 +53,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
       - name: Run tests
-        run: python test/test_app.py # Replace with the actual command to run your tests
+        run: python test/test_app.py -v # Replace with the actual command to run your tests
   lint:
     name: Code Linting
     runs-on: ubuntu-latest
