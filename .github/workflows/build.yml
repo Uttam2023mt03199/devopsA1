@@ -43,7 +43,7 @@ jobs:
 
         if [ $? -eq 0 ]; then
           echo "Command executed successfully"
-          exit 0;
+          exit 10;
         else
           echo "Command failed"
           exit 10;
