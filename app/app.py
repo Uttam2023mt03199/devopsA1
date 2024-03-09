@@ -1,6 +1,4 @@
 """importing the following modules"""
-import signal
-import time
 from flask import Flask, jsonify, request, session
 from flask_cors import CORS
 
@@ -20,33 +18,6 @@ valid_cred = {
 def generate_item_id():
     """Generate a unique item ID."""
     return str(len(items_db) + 1)
-
-class TimeoutException(Exception):
-    pass
-
-def timeout_handler(signum, frame):
-    raise TimeoutException("Build process timed out")
-
-# Register the timeout handler
-signal.signal(signal.SIGALRM, timeout_handler)
-
-# Set a timeout of 10 seconds
-signal.alarm(10)
-
-try:
-    # Your build process goes here
-    # For demonstration purposes, we'll just sleep for 20 seconds
-    time.sleep(20)
-
-except TimeoutException:
-    print("Build process timed out. Please check the logs for more information.")
-    # Perform cleanup or other necessary actions here
-    # You can also exit with a success status code if you want the build to pass
-    exit(0)
-
-finally:
-    # Disable the alarm
-    signal.alarm(0)
 
 
 @app.route('/login', methods=['POST'])

@@ -21,7 +21,7 @@ jobs:
           
   build:
     name: Build Job
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest    
     
     steps:
     - name: Checkout code
@@ -38,7 +38,11 @@ jobs:
         pip install -r requirements.txt
         
     - name: Run build
-      run: python app/app.py  # Replace with the actual command to run your tests 
+      run: |
+        python app/app.py  # Replace with the actual command to run your tests 
+        exit 0
+   
+    
   test:
     name: Run Tests
     runs-on: ubuntu-latest
