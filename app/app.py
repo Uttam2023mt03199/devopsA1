@@ -1,4 +1,4 @@
-"""importing the following modules"""
+"""importing the following module"""
 from flask import Flask, jsonify, request, session
 from flask_cors import CORS
 
